@@ -42,7 +42,7 @@ const Profile = (props) => {
           />
         </div>
         <div className="flex flex-col mt-3 items-start">
-          <NewPostBox addPost={props.addPost} updateNewPostText={props.updateNewPostText} new_post_message={props.profile_data.new_post_message}/>
+          <NewPostBox dispatch={props.dispatch} new_post_message={props.profile_data.new_post_message} />
           <div className="flex flex-col items-start mt-3">{posts}</div>
         </div>
       </div>

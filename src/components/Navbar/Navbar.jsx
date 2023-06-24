@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
   return (
     <div className="backdrop-blur-3xl rounded-l-lg">
-      <nav className="flex flex-col w-20 m-5">
+      <nav className="flex flex-col w-32 m-5">
         <NavLink to="/profile" className="text-sm font-medium  hover:text-blue-600 md:ml-2">
           Profile
         </NavLink>

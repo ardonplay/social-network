@@ -1,13 +1,16 @@
 import React from "react";
+import { updatePostTextActionCreator, addPostActionCreator } from "../../redux/state";
 let newPostElement = React.createRef();
 
 const NewPostBox = (props) => {
   const publishPost = () => {
-    props.addPost();
+    let action = addPostActionCreator()
+    props.dispatch(action);
   };
 
   const changePostText = () => {
-    props.updateNewPostText(newPostElement.current.value);
+    let action = updatePostTextActionCreator(newPostElement.current.value)
+    props.dispatch(action);
   }
   return (
     <div className="flex flex-col items-start">
