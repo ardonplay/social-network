@@ -4,14 +4,14 @@ import profile from "../../static/profile.png";
 const Post = (props) => {
   let profileIcon = profile;
 
-  if (props.profileIcon != undefined) {
+  if (props.profileIcon !== undefined) {
     profileIcon = props.profileIcon;
   }
 
   return (
     <div className="flex flex-col items-start mt-5">
       <div className="flex flex-row items-start">
-        <img src={profileIcon} className="w-10 rounded-full" />
+        <img src={profileIcon} className="w-10 rounded-full" alt="profileIcon" />
         <div className="ml-3 flex flex-col w-auto items-start">
           <div className="">{props.name}</div>
           <div className="font-extralight text-xs -mt-1">{props.date}</div>
