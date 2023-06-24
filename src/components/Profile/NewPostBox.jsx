@@ -4,6 +4,7 @@ let newPostElement = React.createRef();
 const NewPostBox = (props) => {
   const publishPost = () => {
     props.addPost(newPostElement.current.value);
+    props.updateNewPostText("")
   };
 
   const changePostText = () => {
