@@ -3,12 +3,10 @@ let newPostElement = React.createRef();
 
 const NewPostBox = (props) => {
   const publishPost = () => {
-    props.addPost(newPostElement.current.value);
-    props.updateNewPostText("")
+    props.addPost();
   };
 
   const changePostText = () => {
-    console.log(props.new_post_message)
     props.updateNewPostText(newPostElement.current.value);
   }
   return (

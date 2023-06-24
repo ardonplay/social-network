@@ -31,14 +31,15 @@ let state = {
     }
   }
 
-  export let addPost = (postMessage) => {
+  export let addPost = () => {
     let newPost = {
         date: "23.06.2023",
-        message: postMessage,
+        message: state.profile_data.new_post_message,
         name: "Gleb LEvkov",
         profileIcon: levkov 
     }
     state.profile_data.posts.push(newPost);
+    updateNewPostText("")
     renderEntireTree(state)
   }
 
