@@ -44,12 +44,10 @@ let store = {
         }
         this._state.profile_data.posts.push(newPost)
         this._updateNewPostText("")
-        this._callSubscriber()
     },
     _updateNewPostText(postMessage) {
         console.log(this._state.profile_data)
         this._state.profile_data.new_post_message = postMessage;
-        this._callSubscriber()
     },
 
     subscribe(observer) {
@@ -64,9 +62,12 @@ let store = {
         switch (action.type) {
             case ADD_POST:
                 this._addPost()
+                break;
             case UPDATE_POST_TEXT:
                 this._updateNewPostText(action.message)
+                break;
         }
+         this._callSubscriber()
     }
 }
 
