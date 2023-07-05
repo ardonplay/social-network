@@ -1,9 +1,31 @@
+import levkov from "../static/gleb.jpeg"
+import vasilkov from "../static/egor.jpeg"
+import profileLogo from "../static/profile.png"
+
 const ADD_MESSAGE = "ADD-MESSAGE"
 const UPDATE_MESSAGE_TEXT = "UPDATE-MESSAGE-TEXT"
 
-const dialogsReducer = (state, action) => {
+let initialState = {
+    user_id: 669,
+    dialogs: [
+        { id: 115, name: "Gleb Levkov", avatar: levkov },
+        { id: 228, name: "Egor Vasilkov", avatar: vasilkov },
+        { id: 453, name: "Dmitry Cringeman", avatar: profileLogo },
+    ],
+    messagies: [
+        { id: 115, message: "Hi, how are u?" },
+        { id: 669, message: "I'm fine! Thanks!" },
+        { id: 115, message: "What are u think about training in cs:go?" },
+        { id: 669, message: "Let`s go!" },
+    ],
+    new_message: ""
+}
+
+const dialogsReducer = (state = initialState, action) => {
+    let editedState = JSON.parse(JSON.stringify(state));;
+
     const updateNewMessageText = (message) =>{
-        state.new_message = message;
+        editedState.new_message = message;
     }
 
     const addMessage = () => {
@@ -11,19 +33,19 @@ const dialogsReducer = (state, action) => {
             id: 669,
             message: state.new_message
         }
-        state.messagies.push(newMessage)
+        editedState.messagies.push(newMessage)
         updateNewMessageText("")
     }
 
     switch (action.type) {
         case ADD_MESSAGE:
             addMessage()
-            return state;
+            return editedState;
         case UPDATE_MESSAGE_TEXT:
             updateNewMessageText(action.message)
-            return state;
+            return editedState;
         default:
-            return state;
+            return editedState;
     }
 }   
 
