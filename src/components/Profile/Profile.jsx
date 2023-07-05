@@ -4,7 +4,7 @@ import wall from "../../static/wallBackground.png";
 import profile from "../../static/profile.png";
 import ProfileInfo from "./ProfileInfo";
 import Post from "./Post";
-import NewPostBox from "./NewPostBox";
+import NewPostBoxContainer from "./NewPostBoxContainer";
 
 const Profile = (props) => {
   let profile_data = props.profile_data
@@ -42,7 +42,7 @@ const Profile = (props) => {
           />
         </div>
         <div className="flex flex-col mt-3 items-start">
-          <NewPostBox dispatch={props.dispatch} new_post_message={props.profile_data.new_post_message} />
+          <NewPostBoxContainer dispatch={props.dispatch} new_post_message={props.profile_data.new_post_message} />
           <div className="flex flex-col items-start mt-3">{posts}</div>
         </div>
       </div>

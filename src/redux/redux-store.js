@@ -7,9 +7,6 @@ let reducers = combineReducers({
     dialog_data: dialogsReducer
 });
 
-let store = configureStore({reducer: {
-    profile_data: profileReducer,
-    dialog_data: dialogsReducer
-} })
+let store = configureStore({reducer: reducers })
 
 export default store;

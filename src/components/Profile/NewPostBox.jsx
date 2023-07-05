@@ -1,16 +1,14 @@
 import React from "react";
-import { updatePostTextActionCreator, addPostActionCreator } from "../../redux/profile-reducer";
 let newPostElement = React.createRef();
 
 const NewPostBox = (props) => {
   const publishPost = () => {
-    let action = addPostActionCreator()
-    props.dispatch(action);
+    props.publishPost()
   };
 
   const changePostText = () => {
-    let action = updatePostTextActionCreator(newPostElement.current.value)
-    props.dispatch(action);
+    let text = newPostElement.current.value;
+    props.changePostText(text)
   }
   return (
     <div className="flex flex-col items-start">
