@@ -1,5 +1,4 @@
 import levkov from "../static/gleb.jpeg"
-import vasilkov from "../static/egor.jpeg"
 
 const ADD_POST = "ADD-POST"
 const UPDATE_POST_TEXT = "UPDATE-POST-TEXT"
@@ -11,36 +10,27 @@ let initialState = {
         city: "Minsk",
         education: "BSUIR'25"
     },
-    posts: [{ name: "Gleb Levkov", message: "Wtf?", date: "23.06.2023", profileIcon: levkov }],
+    posts: [{ id: 1, name: "Gleb Levkov", message: "Wtf?", date: "23.06.2023", profileIcon: levkov }],
     new_post_message: ""
 }
+
 const profileReducer = (state = initialState, action) => {
-    let editedState = JSON.parse(JSON.stringify(state));;
-    
-    const addPost = () => {
-        let newPost = {
-            date: "23.06.2023",
-            message: state.new_post_message,
-            name: "Gleb Levkov",
-            profileIcon: levkov
-        }
-        editedState.posts.push(newPost)
-        updateNewPostText("")
-    }
-
-    const updateNewPostText = (postMessage) =>{
-        editedState.new_post_message = postMessage;    
-    }
-
     switch (action.type) {
-        case ADD_POST:
-            addPost()
-            return editedState;
-        case UPDATE_POST_TEXT:
-            updateNewPostText(action.message)
-            return editedState;
+        case ADD_POST: {
+            let newPost = {
+                id: 2,
+                date: "23.06.2023",
+                message: state.new_post_message,
+                name: "Gleb Levkov",
+                profileIcon: levkov
+            }
+            return {...state, posts: [...state.posts, newPost], new_post_message: ""}
+        }
+        case UPDATE_POST_TEXT:{
+            return {...state, new_post_message: action.message}
+        }
         default:
-            return editedState;
+            return state;
     }
 }
 

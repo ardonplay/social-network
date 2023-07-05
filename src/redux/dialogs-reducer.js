@@ -22,32 +22,22 @@ let initialState = {
 }
 
 const dialogsReducer = (state = initialState, action) => {
-    let editedState = JSON.parse(JSON.stringify(state));;
-
-    const updateNewMessageText = (message) =>{
-        editedState.new_message = message;
-    }
-
-    const addMessage = () => {
-        let newMessage = {
-            id: 669,
-            message: state.new_message
-        }
-        editedState.messagies.push(newMessage)
-        updateNewMessageText("")
-    }
 
     switch (action.type) {
-        case ADD_MESSAGE:
-            addMessage()
-            return editedState;
-        case UPDATE_MESSAGE_TEXT:
-            updateNewMessageText(action.message)
-            return editedState;
+        case ADD_MESSAGE: {
+            let newMessage = {
+                id: 669,
+                message: state.new_message
+            }
+            return { ...state, messagies: [...state.messagies, newMessage], new_message: "" };
+        }
+        case UPDATE_MESSAGE_TEXT: {
+            return { ...state, new_message: action.message }
+        }
         default:
-            return editedState;
+            return state;
     }
-}   
+}
 
 export const addMessageActionCreator = () => ({ type: ADD_MESSAGE })
 export const updateMessageTextActionCreator = (message) =>

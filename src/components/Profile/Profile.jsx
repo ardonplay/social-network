@@ -5,6 +5,7 @@ import profile from "../../static/profile.png";
 import ProfileInfo from "./ProfileInfo";
 import Post from "./Post";
 import NewPostBoxContainer from "./NewPostBoxContainer";
+import PostsContainer from "./PostsContainer";
 
 const Profile = (props) => {
   let profile_data = props.profile_data
@@ -14,14 +15,6 @@ const Profile = (props) => {
   if (props.profileIcon !== undefined) {
     profileIcon = props.profileIcon;
   }
-
-
-  let posts =
-    profile_data.posts !== undefined
-      ? profile_data.posts.map((post) => (
-          <Post name={post.name} date={post.date} message={post.message} profileIcon={post.profileIcon}/>
-        ))
-      : undefined;
 
   let profileWall = profile_data.wall !== undefined ? profile_data.wall : wall;
   return (
@@ -43,7 +36,7 @@ const Profile = (props) => {
         </div>
         <div className="flex flex-col mt-3 items-start">
           <NewPostBoxContainer dispatch={props.dispatch} new_post_message={props.profile_data.new_post_message} />
-          <div className="flex flex-col items-start mt-3">{posts}</div>
+          <PostsContainer/>
         </div>
       </div>
     </div>
