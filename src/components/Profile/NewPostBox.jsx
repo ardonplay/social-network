@@ -1,5 +1,5 @@
 import React from "react";
-import { updatePostTextActionCreator, addPostActionCreator } from "../../redux/state";
+import { updatePostTextActionCreator, addPostActionCreator } from "../../redux/profile-reducer";
 let newPostElement = React.createRef();
 
 const NewPostBox = (props) => {

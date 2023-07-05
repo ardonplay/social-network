@@ -1,10 +1,19 @@
 import React from "react";
+import { addMessageActionCreator, updateMessageTextActionCreator } from "../../redux/dialogs-reducer";
 let newMessageElement = React.createRef();
-const publish = () => {
-  alert(newMessageElement.current.value);
-};
 
-const NewMessage = () => {
+const NewMessage = (props) => {
+
+  const publish = () => {
+    let action = addMessageActionCreator()
+    props.dispatch(action);
+  };
+  
+  const changeMessageText = () => {
+    let action = updateMessageTextActionCreator(newMessageElement.current.value)
+    props.dispatch(action);
+  }
+
   return (
     <div className="absolute bottom-5">
     <div className="flex flex-col items-start">
@@ -15,6 +24,8 @@ const NewMessage = () => {
           aria-describedby="new-post-explanation"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="type your message..."
+          value={props.new_message}
+          onChange={changeMessageText}
         />
         <button
           type="submit"

@@ -1,8 +1,9 @@
 import levkov from "../static/gleb.jpeg"
 import vasilkov from "../static/egor.jpeg"
 import profileLogo from "../static/profile.png"
-const ADD_POST = "ADD-POST"
-const UPDATE_POST_TEXT = "UPDATE-POST-TEXT"
+import profileReducer from "./profile-reducer"
+import dialogsReducer from "./dialogs-reducer"
+
 let store = {
     _state: {
         user_id: 669,
@@ -28,28 +29,15 @@ let store = {
                 { id: 669, message: "I'm fine! Thanks!" },
                 { id: 115, message: "What are u think about training in cs:go?" },
                 { id: 669, message: "Let`s go!" },
-            ]
+            ],
+            new_message: ""
         }
     },
     _callSubscriber() {
         console.log("state was changed")
     },
 
-    _addPost() {
-        let newPost = {
-            date: "23.06.2023",
-            message: this._state.profile_data.new_post_message,
-            name: "Gleb LEvkov",
-            profileIcon: levkov
-        }
-        this._state.profile_data.posts.push(newPost)
-        this._updateNewPostText("")
-    },
-    _updateNewPostText(postMessage) {
-        console.log(this._state.profile_data)
-        this._state.profile_data.new_post_message = postMessage;
-    },
-
+    
     subscribe(observer) {
         this._callSubscriber = observer
     },
@@ -59,24 +47,12 @@ let store = {
     },
 
     dispatch(action) {
-        switch (action.type) {
-            case ADD_POST:
-                this._addPost()
-                break;
-            case UPDATE_POST_TEXT:
-                this._updateNewPostText(action.message)
-                break;
-        }
-         this._callSubscriber()
+        this._state.profile_data = profileReducer(this._state.profile_data, action);
+        this._state.dialog_data = dialogsReducer(this._state.dialog_data, action);
+        this._callSubscriber()
     }
 }
 
-
-
-export const addPostActionCreator = () => ({ type: ADD_POST })
-
-export const updatePostTextActionCreator = (message) =>
-    ({ type: UPDATE_POST_TEXT, message: message })
 
 export default store
 window.store = store

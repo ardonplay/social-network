@@ -21,7 +21,7 @@ const Dialogs = (props) => {
 
       <div className="m-6 w-full">
         {messagies}
-        <NewMessage /></div>
+        <NewMessage dispatch={props.dispatch} new_message={props.dialog_data.new_message}/></div>
     </div>
   );
 };
