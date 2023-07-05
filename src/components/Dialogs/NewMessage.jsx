@@ -1,17 +1,14 @@
 import React from "react";
-import { addMessageActionCreator, updateMessageTextActionCreator } from "../../redux/dialogs-reducer";
 let newMessageElement = React.createRef();
 
 const NewMessage = (props) => {
 
-  const publish = () => {
-    let action = addMessageActionCreator()
-    props.dispatch(action);
+  const send = () => {
+    props.send()
   };
   
   const changeMessageText = () => {
-    let action = updateMessageTextActionCreator(newMessageElement.current.value)
-    props.dispatch(action);
+    props.changeMessageText(newMessageElement.current.value)
   }
 
   return (
@@ -29,7 +26,7 @@ const NewMessage = (props) => {
         />
         <button
           type="submit"
-          onClick={publish}
+          onClick={send}
           className="ml-2 text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Send

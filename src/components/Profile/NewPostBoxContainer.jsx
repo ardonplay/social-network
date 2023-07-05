@@ -1,27 +1,22 @@
-import React from "react";
-import { updatePostTextActionCreator, addPostActionCreator } from "../../redux/profile-reducer";
+import {
+  updatePostTextActionCreator,
+  addPostActionCreator,
+} from "../../redux/profile-reducer";
 import NewPostBox from "./NewPostBox";
+import { connect } from "react-redux";
 
-const NewPostBoxContainer = (props) => {
-  const onPublishPost = () => {
-    let action = addPostActionCreator()
-    props.dispatch(action);
-  };
-
-  const onChangePostText = (text) => {
-    let action = updatePostTextActionCreator(text)
-    props.dispatch(action);
+const mapStateToProps = (state) => {
+  return {
+    new_post_message: state.profile_data.new_post_message,
   }
+}
 
-  let NewPostBoxProps = {
-    publishPost: onPublishPost,
-    changePostText: onChangePostText,
-    new_post_message: props.new_post_message
+const mapDispatchToProps = (dispatch) => {
+  return {
+    publishPost: () => {dispatch(addPostActionCreator())},
+    changePostText: (text) => {dispatch(updatePostTextActionCreator(text))}
   }
-
-  return (
-   <NewPostBox {...NewPostBoxProps}/>
-  );
-};
+}
+const NewPostBoxContainer = connect(mapStateToProps, mapDispatchToProps)(NewPostBox);
 
 export default NewPostBoxContainer;

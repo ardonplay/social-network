@@ -2,6 +2,7 @@ import React from "react";
 import DialogItem from "./DialogItem";
 import Message from "./Message";
 import NewMessage from "./NewMessage";
+import NewMessageContainer from "./NewMessageContainer";
 const Dialogs = (props) => {
   let user_id = props.dialog_data.user_id;
   
@@ -21,7 +22,7 @@ const Dialogs = (props) => {
 
       <div className="m-6 w-full">
         {messagies}
-        <NewMessage dispatch={props.dispatch} new_message={props.dialog_data.new_message}/></div>
+        <NewMessageContainer dispatch={props.dispatch} new_message={props.dialog_data.new_message}/></div>
     </div>
   );
 };
