@@ -10,11 +10,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 export let renderEntireTree = () => {
     root.render(
-        <React.StrictMode>
             <Provider store={store}>
             <App state={store.getState()} dispatch={store.dispatch.bind(store)} />
             </Provider>
-        </React.StrictMode>
     );
 }
 store.subscribe(renderEntireTree)

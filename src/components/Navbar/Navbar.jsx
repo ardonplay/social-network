@@ -13,6 +13,9 @@ const Navbar = () => {
         <NavLink to="/news" className=" text-sm font-medium  hover:text-blue-600 md:ml-2">
           News
         </NavLink>
+        <NavLink to="/users" className=" text-sm font-medium  hover:text-blue-600 md:ml-2">
+          Users
+        </NavLink>
         <NavLink to="/music" className=" text-sm font-medium  hover:text-blue-600 md:ml-2">
           Music
         </NavLink>

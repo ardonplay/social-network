@@ -12,15 +12,6 @@ function App(props) {
   return (
     <BrowserRouter>
       <div className="App">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Navigate to="profile" />
-            }
-          />
-        </Routes>
-
         <Backgroud />
         <Header />
         <div className="flex flex-row text-red-50 rounded-lg m-5 bg-gradient-to-b from-[#1e3b8ac5] to-[#1e3b8a3f] border-[1px] border-solid border-white border-opacity-20  shadow-[rgba(0,0,0,0.30)] shadow-xl w-3/5 mx-auto">
