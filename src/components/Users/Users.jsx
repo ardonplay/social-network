@@ -1,51 +1,61 @@
 import React from "react";
-import icon from "../../static/profile.png";
 import axios from "axios";
+import UserBox from "./UserBox";
 
 class Users extends React.Component {
-  constructor(props) {
-    super(props);
-    
+  componentDidMount() {
     axios
-      .get("https://social-network.samuraijs.com/api/1.0/users")
-      .then((request) => this.props.setUsers(request.data.items));
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+      )
+      .then((request) => {
+        this.props.setUsers(request.data.items);
+        this.props.setTotalCount(request.data.totalCount);
+      });
   }
+  onPageChanged = (page) => {
+    this.props.setPage(page);
+
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`
+      )
+      .then((request) => {
+        this.props.setUsers(request.data.items);
+      });
+  };
   render() {
+    let pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize);
+
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+      pages.push(i);
+    }
     return (
       <div className="m-5">
+        {pages.map((page) => (
+          <div
+            onClick={() => {
+              this.onPageChanged(page);
+            }}
+            key={page}
+            className={
+              this.props.currentPage === page
+                ? " text-amber-500 font-bold"
+                : "font-bold"
+            }
+          >
+            {page}
+          </div>
+        ))}
         <div className="flex flex-col">
           {this.props.users.map((user) => (
-            <div className="flex flex-row" key={user.id}>
-              <div className="flex-col">
-                <img src={icon} className="w-14" alt="profileIcon" />
-                {user.followed ? (
-                  <button
-                    type="submit"
-                    onClick={() => {
-                      this.props.unfollow(user.id);
-                    }}
-                    className="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-3 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  >
-                    Unfollow
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    onClick={() => {
-                      this.props.follow(user.id);
-                    }}
-                    className="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-3 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  >
-                    Follow
-                  </button>
-                )}
-              </div>
-              <div className="w-3/4 flex-col">
-                <p>{user.name}</p>
-                <p>{user.status}</p>
-              </div>
-              <div className="w-3/4 flex-col">location</div>
-            </div>
+            <UserBox
+              key={user.id}
+              user={user}
+              follow={this.props.follow}
+              unfollow={this.props.unfollow}
+            />
           ))}
         </div>
       </div>
