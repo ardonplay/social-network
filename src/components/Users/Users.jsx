@@ -3,10 +3,13 @@ import icon from "../../static/profile.png";
 import axios from "axios";
 
 const Users = (props) => {
-    
-  if (props.users.length <= 0) {
-    axios.get("https://social-network.samuraijs.com/api/1.0/users").then((request) =>props.setUsers(request.data.items))
-  }
+  let getUsers = () => {
+    if(props.users.length === 0){
+    axios
+      .get("https://social-network.samuraijs.com/api/1.0/users")
+      .then((request) => props.setUsers(request.data.items));
+    }
+  };
   let users = props.users.map((user) => (
     <div className="flex flex-row" key={user.id}>
       <div className="flex-col">
@@ -37,13 +40,12 @@ const Users = (props) => {
         <p>{user.name}</p>
         <p>{user.status}</p>
       </div>
-      <div className="w-3/4 flex-col">
-        location
-      </div>
+      <div className="w-3/4 flex-col">location</div>
     </div>
   ));
   return (
     <div className="m-5">
+         <button onClick={getUsers} >get users</button>
       <div className="flex flex-col">{users}</div>
     </div>
   );
