@@ -1,7 +1,12 @@
 import React from "react";
 import icon from "../../static/profile.png";
+import axios from "axios";
 
 const Users = (props) => {
+    
+  if (props.users.length <= 0) {
+    axios.get("https://social-network.samuraijs.com/api/1.0/users").then((request) =>props.setUsers(request.data.items))
+  }
   let users = props.users.map((user) => (
     <div className="flex flex-row" key={user.id}>
       <div className="flex-col">
@@ -9,7 +14,9 @@ const Users = (props) => {
         {user.followed ? (
           <button
             type="submit"
-            onClick={() => {props.unfollow(user.id)}}
+            onClick={() => {
+              props.unfollow(user.id);
+            }}
             className="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-3 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Unfollow
@@ -17,7 +24,9 @@ const Users = (props) => {
         ) : (
           <button
             type="submit"
-            onClick={() => {props.follow(user.id)}}
+            onClick={() => {
+              props.follow(user.id);
+            }}
             className="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-3 py-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Follow
@@ -29,7 +38,7 @@ const Users = (props) => {
         <p>{user.status}</p>
       </div>
       <div className="w-3/4 flex-col">
-        {user.location.city}, {user.location.country}
+        location
       </div>
     </div>
   ));

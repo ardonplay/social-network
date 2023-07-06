@@ -3,7 +3,6 @@ import React from "react";
 import wall from "../../static/wallBackground.png";
 import profile from "../../static/profile.png";
 import ProfileInfo from "./ProfileInfo";
-import Post from "./Post";
 import NewPostBoxContainer from "./NewPostBoxContainer";
 import PostsContainer from "./PostsContainer";
 

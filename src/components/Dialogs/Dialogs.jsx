@@ -1,7 +1,6 @@
 import React from "react";
 import DialogItem from "./DialogItem";
 import Message from "./Message";
-import NewMessage from "./NewMessage";
 import NewMessageContainer from "./NewMessageContainer";
 const Dialogs = (props) => {
   let user_id = props.dialog_data.user_id;
