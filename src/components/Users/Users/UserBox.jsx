@@ -9,7 +9,7 @@ const UserBox = (props) => {
         <NavLink to={"/profile/" + props.user.id}>
           <img
             src={props.user.photos.small ? props.user.photos.small : icon}
-            className="w-14"
+            className="w-14 rounded-full"
             alt="profileIcon"
           />
         </NavLink>

@@ -11,6 +11,7 @@ const Profile = (props) => {
 
   let profileWall = profile_data.wall !== undefined ? profile_data.wall : wall;
 
+  console.log(profile_data.profile_info.profile_icon)
   return (
     <div className="flex-auto w-80 backdrop-blur-md rounded-lg">
       <div className="m-5">
@@ -22,7 +23,7 @@ const Profile = (props) => {
 
         <div className="flex flex-row mt-3">
           <div>
-            <img src={profile_data.profile_info.profile_icon !== undefined ? profile_data.profile_info.profile_icon : profile} className="w-16" alt="profileIcon" />
+            <img src={profile_data.profile_info.profile_icon ? profile_data.profile_info.profile_icon : profile} className="w-16 rounded-full" alt="profileIcon" />
           </div>
           <ProfileInfo
             profileInfo={profile_data.profile_info}
