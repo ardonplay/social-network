@@ -1,5 +1,5 @@
 import React from "react";
-import icon from "../../static/profile.png";
+import icon from "../../../static/profile.png";
 
 const UserBox = (props) => {
     return(
