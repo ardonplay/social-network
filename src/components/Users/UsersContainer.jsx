@@ -9,9 +9,8 @@ import {
   setUsersActionCreator,
   unfollowActionCreator,
 } from "../../redux/users-reducer";
-
-import preloader from "../../static/loading.gif"
 import { setLoadingActionCreator } from "../../redux/loading-reducer";
+import Preloader from "../common/Preloader";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -39,7 +38,7 @@ class UsersContainer extends React.Component {
       });
   };
   render() {
-    return <>{this.props.isLoading ? <div><img src={preloader} alt="loading"/></div> : <Users {...this.props} onPageChanged={this.onPageChanged}/> } </>;
+    return <>{this.props.isLoading ? <Preloader />: <Users {...this.props} onPageChanged={this.onPageChanged}/> } </>;
   }
 }
 
@@ -55,27 +54,13 @@ let mapStateToProps = (state) => {
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    follow: (id) => {
-      dispatch(followActionCreator(id));
-    },
-    unfollow: (id) => {
-      dispatch(unfollowActionCreator(id));
-    },
-    setUsers: (users) => {
-        dispatch(setUsersActionCreator(users))
-    },
-    setPage: (page) => {
-        dispatch(setCurrentPageActionCreator(page))
-    },
-    setTotalCount: (totalCount) => {
-        dispatch(setTotalCountActionCreator(totalCount))
-    },
-    setLoading: (loading) => {
-      dispatch(setLoadingActionCreator(loading))
-    }
-  };
+let mapDispatchToProps = {
+    follow: followActionCreator,
+    unfollow: unfollowActionCreator,
+    setUsers: setUsersActionCreator,
+    setPage: setCurrentPageActionCreator,
+    setTotalCount: setTotalCountActionCreator,
+    setLoading: setLoadingActionCreator
 };
 
 
